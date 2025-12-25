@@ -1,5 +1,19 @@
 # Dynamic Programming: A Complete Beginner's Guide
 
+## Table of Contents
+1. [What is Dynamic Programming?](#what-is-dynamic-programming)
+2. [Real-World Analogy](#a-real-world-analogy)
+3. [Key Conditions](#key-conditions-for-using-dynamic-programming)
+4. [Overlapping Subproblems](#overlapping-subproblems)
+5. [Optimal Substructure](#optimal-substructure)
+6. [Memoization](#memoization)
+7. [Tabulation](#tabulation)
+8. [Time Complexity](#time-complexity)
+9. [Classic Examples](#classic-examples)
+10. [When to Use DP](#when-to-use-dynamic-programming)
+
+---
+
 ## What is Dynamic Programming?
 
 Dynamic Programming (DP) is a **problem-solving technique** that works by:

@@ -1,5 +1,23 @@
 # Dynamic Programming Path Finding with Keys and Doors
 
+## Table of Contents
+1. [Overview](#overview)
+2. [Problem Domain](#problem-domain)
+3. [State Space](#state-space)
+4. [Action Space](#action-space)
+5. [Core Components](#core-components)
+6. [Value Iteration Algorithm](#value-iteration-algorithm)
+7. [Q-Value Iteration Algorithm](#q-value-iteration-algorithm)
+8. [Policy Extraction](#policy-extraction)
+9. [Reward Structure](#reward-structure)
+10. [Key Methods](#key-methods)
+11. [Execution Flow](#execution-flow)
+12. [Example Walkthrough](#example-walkthrough)
+13. [Convergence Analysis](#convergence-analysis)
+14. [Extensions](#extensions)
+
+---
+
 ## Overview
 
 This project implements **Dynamic Programming algorithms** to solve an optimal path-finding problem in a grid-based environment. The agent must navigate through a prison-like maze, collect keys, unlock doors, and reach a goal location with the maximum reward.
