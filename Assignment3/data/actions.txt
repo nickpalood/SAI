@@ -1,0 +1,14 @@
+#In the act phase, the agent will try one action in the environment. 
+#If the action fails, the agent will not have executed the action in the world, and the agent will go to the next cycle.
+#If the action succeeds, the action rules (this file) are evaluated using inference on the union of the action rules, the beliefs and the desires.
+#This is how possible postconditions are triggered. Note that you cannot form new intentions in this phase, so, world actions cannot be postconditions of actions!!!
+#Add your action postcondition rules below:
+
+#action for opening door (unlock)
+open(X,K) > -atLocked(X,K) & -hasKey(K) & +notLocked(X,K)
+
+#action for grabbing the key (add key to inventory and remove key from position)
+grab(X,K) > +hasKey(K) & -atKey(X,K)
+
+#after moving, update your location (remove old, add new)
+goto(X,Y) > -at(X) & +at(Y)

@@ -1,0 +1,52 @@
+%A typical family database.
+male(joost).
+male(sacha).
+male(leon).
+male(merlijn).
+male(peter).
+
+female(sofie).
+female(sandrine).
+female(fien).
+
+parent(joost,sacha).
+parent(joost,leon).
+parent(sandrine,sacha).
+parent(sandrine,leon).
+parent(fien,sofie).
+parent(fien,merlijn).
+parent(peter,fien).
+parent(peter,joost).
+
+
+sister(X, Y) :-
+    female(X),
+    parent(P, X), parent(P, Y),
+    X \= Y.
+
+brother(X, Y) :-
+    male(X),
+    parent(P, X), parent(P, Y),
+    X \= Y.
+
+cousin(X, Y) :-
+    male(X),
+    parent(P, X),
+    (brother(P, Z); sister(P, Z)),
+    parent(Z, Y),
+    X \= Y.
+
+
+ancestor(X, Y) :-
+	parent(X, Y);
+	(parent(X, Z), ancestor(Z, Y)).
+
+family(X, Y) :-
+	ancestor(X, Y);
+	ancestor(Y, X);
+	(ancestor(A, X), ancestor(A, Y), X \=Y).
+
+
+
+
+

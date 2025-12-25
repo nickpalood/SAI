@@ -1,0 +1,55 @@
+
+% Remove any previous robot/1 facts (in case you're reloading)
+:- retractall(robot(_)).
+
+% Tell Prolog that 'robot/1' can change during runtime (be added/retracted)
+:- dynamic robot/1.
+
+% The robot starts at location 1
+robot(1).
+
+% The goal (destination) is at location 5
+goal(5).
+
+%link(3,1).
+link(1, 2).
+link(2, 3).
+link(3, 4).
+link(3, 6).
+link(6, 5).
+link(6, 7).
+
+adjacent(L) :-
+    robot(X),     % get the robot's current position
+    link(X, L).   % check if there's a link from X to L
+
+suggest(L) :-
+    path([L|_]).  % path/1 returns a list of locations; L is the first step
+
+% Move based on a suggested next step
+move(L) :-
+    suggest(L),           % check if L is a suggested move
+    retract(robot(_)),    % remove the old robot position
+    assertz(robot(L)).    % add the new one at the end of the database
+
+% Move manually if the location is adjacent
+move(L) :-
+    adjacent(L),
+    retract(robot(_)),
+    assertz(robot(L)).
+
+path(P) :-
+    robot(X),    % current position
+    goal(G),     % goal position
+    find_path(X, G, P).
+
+
+find_path(X, X, []).   % base case: reached the goal
+
+find_path(X, Goal, [Y|Rest]) :-
+    link(X, Y),             % find a direct link
+    find_path(Y, Goal, Rest).  % continue from Y to the goal
+
+append([], X, X).
+append([X | Y], Z, [X | W]) :-
+    append(Y, Z, W).

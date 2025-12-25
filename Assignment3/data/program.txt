@@ -1,0 +1,39 @@
+#In the think step, your agent evaluates the program rules.
+#It does so by doing inference on the union of the program rules (this file) and the belief base.
+#The program rules define how and when actions need to be added to the intentions, goals need to be addopted and beliefs needs to be added or deleted
+#Actions are defined by the operators +-*~_. See the assignment for an explanantion of these operators.
+#The conditions of a rule are the preconditions, just like any other rule. The conclusion of the rule contains the action(s) and/or facts that can be derived with inference.
+#Actions are not used during inference as new facts (i.e., they cannot unify with the knowledge base), 
+#They are processed by the agent as new facts into the appropriate knowledge bases (beliefs, desires, intentions).
+#The exception is the addition action, of which the predicate is added to the facts during inference.
+#Add your program rules below:
+
+
+#mark current location as visited
+at(X) & !visited(X) > +visited(X)
+
+
+#if exit is visible then go there
+atExit(Y) & !at(Y) > *at(Y)
+
+#if door is locked and has key then unlock it
+atLocked(Y,K) & connected(X,Y) & at(X) & hasKey(K) > *notLocked(Y,K)
+
+#if door is locked and no key then get the key
+atLocked(Y,K) & !hasKey(K) & atKey(Z,K) & !at(Z) > *at(Z)
+
+#visit unvisited connected locations
+connected(X,Y) & at(X) & !visited(Y) & !atLocked(Y,K) > *at(Y)
+
+
+#grab key if at key location
+at(X) & atKey(X,K) & !hasKey(K) > _grab(X,K)
+
+#move to locked location with key
+at(X) & connected(X,Y) & atLocked(Y,K) & hasKey(K) > _goto(X,Y)
+
+#open door if at locked location with key
+at(Y) & atLocked(Y,K) & hasKey(K) > _open(Y,K)
+
+#move to any connected non-locked location
+at(X) & connected(X,Y) & !atLocked(Y,K) > _goto(X,Y)
